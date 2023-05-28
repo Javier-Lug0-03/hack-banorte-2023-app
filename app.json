@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "hack-banorte-2023",
+    "slug": "hack-banorte-2023",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "hack-banorte-2023"
+}
