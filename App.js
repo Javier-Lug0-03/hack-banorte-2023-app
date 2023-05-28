@@ -1,21 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import {React, useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import {NavigationContainer, createAppContainer} from '@react-navigation/native';
+import LoginScreen from './screens/Login';
+import * as Font from 'expo-font';
+import Nearby from './screens/Nearby';
 
-export default function App() {
+async function loadFonts(){
+  await Font.loadAsync({
+    'Roboto': require('./fonts/Roboto-Regular.ttf'),
+    'Gotham': require('./fonts/GothamMedium.ttf')
+  })
+}
+
+const Stack = createStackNavigator();
+const  App = () => {
+  useEffect(() => {
+    loadFonts();
+  }, []);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Login' >
+        <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Ubícanos" component={Nearby} options={{headerShown: true, headerTintColor: '#FFFFFF' ,headerStyle:{backgroundColor: '#EB0029'}}}/>
+      </Stack.Navigator> 
+    </NavigationContainer>
+
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
